@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Survey Results</title>
+     <meta charset="UTF-8">
+    <style>
+    .top-nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
+        font-family: Arial, sans-serif;
+        margin-bottom: 20px;
+    }
+
+    .top-nav h1 {
+        margin: 0;
+        font-size: 24px;
+        color: #333;
+
+    }
+
+    .nav-links {
+        display: flex;
+        gap: 20px;
+    }
+
+    .nav-links a {
+        text-decoration: none;
+        color: #333;
+    }
+
+    .nav-links a:hover {
+        text-decoration: underline;
+    }
+
+    .nav-links a:active {
+        color: blue; /* Link turns blue when clicked or after visiting */
+    }
+</style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <div class="top-nav">
+        <h1>_Surveys</h1>
+        <div class="nav-links">
+            <a th:href="@{/survey}">FILL OUT SURVEY</a>
+            <a th:href="@{/results}">VIEW SURVEY RESULTS</a>
+        </div>
+    </div>
+
+<h1 style="text-align: center;">Survey Results</h1>
+
+
+<div th:if="${count == 0}">
+    <p>No Surveys Available.</p>
+</div>
+
+<div th:unless="${count == 0}" style="display: flex; justify-content: center; margin-top: 30px;">
+    <table style="border-collapse: separate; border-spacing: 10px 8px; min-width: 500px;">
+        <tr>
+            <td style="text-align: left;">Total number of surveys:</td>
+            <td style="text-align: right;"><span th:text="${count}"></span></td>
+        </tr>
+        <tr>
+            <td style="text-align: left;">Average Age:</td>
+            <td style="text-align: right;"><span th:text="${avgAge}"></span></td>
+        </tr>
+        <tr>
+            <td style="text-align: left;">Oldest person who participated in survey:</td>
+            <td style="text-align: right;"><span th:text="${maxAge}"></span></td>
+        </tr>
+        <tr>
+            <td style="text-align: left;">Youngest person who participated in survey:</td>
+            <td style="text-align: right;"><span th:text="${minAge}"></span></td>
+        </tr>
+
+        <tr>
+            <td style="text-align: left;">Percentage of people who like Pizza:</td>
+            <td style="text-align: right;"><span th:text="${pizzaPercent}"></span>%</td>
+        </tr>
+        <tr>
+            <td style="text-align: left;">Percentage of people who like Pasta:</td>
+            <td style="text-align: right;"><span th:text="${pastaPercent}"></span>%</td>
+        </tr>
+        <tr>
+            <td style="text-align: left;">Percentage of people who like Pap and Wors:</td>
+            <td style="text-align: right;"><span th:text="${papAndWorsPercent}"></span>%</td>
+        </tr>
+
+        <tr>
+            <td style="text-align: left;">People who like to watch movies:</td>
+            <td style="text-align: right;"><span th:text="${avgMovies}"></span></td>
+        </tr>
+        <tr>
+            <td style="text-align: left;">People who like to listen to radio:</td>
+            <td style="text-align: right;"><span th:text="${avgRadio}"></span></td>
+        </tr>
+        <tr>
+            <td style="text-align: left;">People who like to eat out:</td>
+            <td style="text-align: right;"><span th:text="${avgEatOut}"></span></td>
+        </tr>
+        <tr>
+            <td style="text-align: left;">People who like to watch TV:</td>
+            <td style="text-align: right;"><span th:text="${avgTV}"></span></td>
+        </tr>
+    </table>
+</div>
+
+</body>
+</html>

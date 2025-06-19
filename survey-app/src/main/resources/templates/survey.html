@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lifestyle Survey</title>
+    <meta charset="UTF-8">
+    <style>
+    .top-nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
+        font-family: Arial, sans-serif;
+        margin-bottom: 20px;
+    }
+
+    .top-nav h1 {
+        margin: 0;
+        font-size: 24px;
+        color: #333;
+
+    }
+
+    .nav-links {
+        display: flex;
+        gap: 20px;
+    }
+
+    .nav-links a {
+        text-decoration: none;
+        color: #333;
+    }
+
+    .nav-links a:hover {
+        text-decoration: underline;
+    }
+
+    .nav-links a:active {
+        color: blue; /* Link turns blue when clicked or after visiting */
+    }
+    
+  input[type="text"],
+  input[type="date"] {
+    border: 1px solid #007BFF; /* Blue border */
+    background-color: white;   /* Keep background white */
+    padding: 6px 10px;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #000;
+  }
+
+  input[type="text"]:focus,
+  input[type="date"]:focus {
+    outline: none;
+    border-color: #0056b3; /* Darker blue on focus */
+  }
+
+  input[type="checkbox"] {
+      accent-color: blue; /* For modern browsers */
+      border: 2px solid blue; /* For browsers that don't support accent-color */
+      width: 16px;
+      height: 16px;
+    }
+
+
+</style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <div class="top-nav">
+        <h1>_Surveys</h1>
+        <div class="nav-links">
+            <a th:href="@{/survey}">FILL OUT SURVEY</a>
+            <a th:href="@{/results}">VIEW SURVEY RESULTS</a>
+        </div>
+    </div>
+
+    <!-- Your form continues here... -->
+
+
+    <form th:action="@{/submit}" th:object="${survey}" method="post">
+        <fieldset style="border: none; text-align: center;">
+    <legend style="text-align: left; font-weight: bold; margin-top: 20px; margin-bottom: 4px;">
+        Personal Details:
+    </legend>
+
+    <div style="display: inline-block; text-align: left;">
+        <label for="name">Full Names:</label><br>
+        <input type="text" id="name" th:field="*{name}" required /><br><br>
+
+        <label for="email">Email:</label><br>
+        <input type="text" id="email" th:field="*{email}" required /><br><br>
+
+        <label for="dob">Date of Birth:</label><br>
+        <input type="date" id="dob" th:field="*{dob}" required /><br><br>
+
+        <label for="contacts">Contact Number:</label><br>
+        <input type="text" id="contacts" th:field="*{contacts}" minlength="5" maxlength="120" required />
+    </div>
+</fieldset>
+
+
+<fieldset style="border: none; margin: 20px 0; padding: 0;">
+  <div style="display: flex; align-items: center; gap: 20px;">
+    <span style="font-weight: bold; white-space: nowrap;">What is your favorite food?</span>
+
+    <label><input type="checkbox" value="Pizza" name="favoriteFoods" /> Pizza</label>
+    <label><input type="checkbox" value="Pasta" name="favoriteFoods" /> Pasta</label>
+    <label><input type="checkbox" value="Pap and Wors" name="favoriteFoods" /> Pap and Wors</label>
+    <label><input type="checkbox" value="Other" name="favoriteFoods" /> Other</label>
+  </div>
+</fieldset>
+
+
+
+<fieldset style="border: none; margin: 20px 0; padding: 0;">
+  <legend style="font-weight: bold; margin-bottom: 10px;">
+    Please rate the level of agreement on a scale from 1 to 5, with 1 being "strongly agree" and 5 being "strongly disagree".
+  </legend>
+
+  <!-- Centering wrapper -->
+  <div style="display: flex; justify-content: center; overflow-x: auto;">
+    <table border="1" cellpadding="8" cellspacing="0" style="border-collapse: collapse; min-width: 600px;">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Strongly Agree</th>
+          <th>Agree</th>
+          <th>Neutral</th>
+          <th>Disagree</th>
+          <th>Strongly Disagree</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>I like to watch movies</td>
+          <td><input type="radio" name="ratingWatchMovies" value="1" required></td>
+          <td><input type="radio" name="ratingWatchMovies" value="2"></td>
+          <td><input type="radio" name="ratingWatchMovies" value="3"></td>
+          <td><input type="radio" name="ratingWatchMovies" value="4"></td>
+          <td><input type="radio" name="ratingWatchMovies" value="5"></td>
+        </tr>
+        <tr>
+          <td>I like to listen to the radio</td>
+          <td><input type="radio" name="ratingListenRadio" value="1" required></td>
+          <td><input type="radio" name="ratingListenRadio" value="2"></td>
+          <td><input type="radio" name="ratingListenRadio" value="3"></td>
+          <td><input type="radio" name="ratingListenRadio" value="4"></td>
+          <td><input type="radio" name="ratingListenRadio" value="5"></td>
+        </tr>
+        <tr>
+          <td>I like to eat out</td>
+          <td><input type="radio" name="ratingEatOut" value="1" required></td>
+          <td><input type="radio" name="ratingEatOut" value="2"></td>
+          <td><input type="radio" name="ratingEatOut" value="3"></td>
+          <td><input type="radio" name="ratingEatOut" value="4"></td>
+          <td><input type="radio" name="ratingEatOut" value="5"></td>
+        </tr>
+        <tr>
+          <td>I like to watch TV</td>
+          <td><input type="radio" name="ratingWatchTV" value="1" required></td>
+          <td><input type="radio" name="ratingWatchTV" value="2"></td>
+          <td><input type="radio" name="ratingWatchTV" value="3"></td>
+          <td><input type="radio" name="ratingWatchTV" value="4"></td>
+          <td><input type="radio" name="ratingWatchTV" value="5"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</fieldset>
+
+
+
+
+<div style="text-align: center; margin-top: 20px;">
+  <button type="submit"
+    style="background-color: #007BFF; color: white; padding: 10px 25px; border: none; border-radius: 4px; font-size: 16px; cursor: pointer;">
+    Submit
+  </button>
+</div>
+
+
+    </form>
+</body>
+</html>
